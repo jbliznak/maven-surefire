@@ -87,14 +87,14 @@ import static org.powermock.reflect.Whitebox.setInternalState;
  * PowerMock tests for {@link ForkedBooter}.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({PpidChecker.class, ForkedBooter.class, EventChannelEncoder.class, ShutdownHookUtils.class})
+@PrepareForTest({ProcessChecker.class, ForkedBooter.class, EventChannelEncoder.class, ShutdownHookUtils.class})
 @PowerMockIgnore({"org.jacoco.agent.rt.*", "com.vladium.emma.rt.*"})
 public class ForkedBooterMockTest {
     @Rule
     public final ErrorCollector errorCollector = new ErrorCollector();
 
     @Mock
-    private PpidChecker pluginProcessChecker;
+    private ProcessChecker pluginProcessChecker;
 
     @Mock
     private ForkedBooter booter;
@@ -113,7 +113,7 @@ public class ForkedBooterMockTest {
 
     @Test
     public void shouldCheckNewPingMechanism() throws Exception {
-        boolean canUse = invokeMethod(ForkedBooter.class, "canUseNewPingMechanism", (PpidChecker) null);
+        boolean canUse = invokeMethod(ForkedBooter.class, "canUseNewPingMechanism", (ProcessChecker) null);
         assertThat(canUse).isFalse();
 
         when(pluginProcessChecker.canUse()).thenReturn(false);
