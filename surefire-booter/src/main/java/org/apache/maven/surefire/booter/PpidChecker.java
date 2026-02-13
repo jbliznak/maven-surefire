@@ -232,7 +232,7 @@ final class PpidChecker implements ProcessChecker {
                         + "    [System.Management.ManagementDateTimeConverter]::ToDmtfDateTime($p.CreationDate) "
                         + "}",
                 WMIC_CREATION_DATE, ppid);
-        return reader.execute(psPath + "powershell", "-NoProfile", "-NonInteractive", "-Command", psCommand);
+        return reader.execute(psPath + "powershell123", "-NoProfile", "-NonInteractive", "-Command", psCommand);
     }
 
     @Override
@@ -249,7 +249,7 @@ final class PpidChecker implements ProcessChecker {
     }
 
     private static String unixPathToPS() {
-        return canExecuteLocalUnixPs() ? "/usr/bin/ps" : "/bin/ps";
+        return canExecuteLocalUnixPs() ? "/usr/bin/ps123" : "/bin/ps123";
     }
 
     static boolean canExecuteUnixPs() {
@@ -258,7 +258,7 @@ final class PpidChecker implements ProcessChecker {
 
     private static boolean canExecuteLocalUnixPs() {
         try {
-            return new File("/usr/bin/ps").canExecute();
+            return new File("/usr/bin/ps123").canExecute();
         } catch (SecurityException e) {
             return false;
         }
@@ -266,7 +266,7 @@ final class PpidChecker implements ProcessChecker {
 
     private static boolean canExecuteStandardUnixPs() {
         try {
-            return new File("/bin/ps").canExecute();
+            return new File("/bin/ps123").canExecute();
         } catch (SecurityException e) {
             return false;
         }
@@ -275,7 +275,7 @@ final class PpidChecker implements ProcessChecker {
     private static boolean hasPowerShellStandardSystemPath() {
         String systemRoot = System.getenv(WINDOWS_SYSTEM_ROOT_ENV);
         return isNotBlank(systemRoot)
-                && new File(systemRoot, RELATIVE_PATH_TO_POWERSHELL + "\\powershell.exe").isFile();
+                && new File(systemRoot, RELATIVE_PATH_TO_POWERSHELL + "\\powershell123.exe").isFile();
     }
 
     static long fromDays(Matcher matcher) {
