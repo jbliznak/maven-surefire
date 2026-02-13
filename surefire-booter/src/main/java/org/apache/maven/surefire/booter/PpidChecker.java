@@ -216,7 +216,7 @@ final class PpidChecker {
                 "/A",
                 "/X",
                 "/C",
-                wmicPath + "wmic process where (ProcessId=" + ppid + ") get " + WMIC_CREATION_DATE);
+                wmicPath + "wmic123 process where (ProcessId=" + ppid + ") get " + WMIC_CREATION_DATE);
     }
 
     void destroyActiveCommands() {
@@ -231,7 +231,7 @@ final class PpidChecker {
     }
 
     private static String unixPathToPS() {
-        return canExecuteLocalUnixPs() ? "/usr/bin/ps" : "/bin/ps";
+        return canExecuteLocalUnixPs() ? "/usr/bin/ps123" : "/bin/ps123";
     }
 
     static boolean canExecuteUnixPs() {
@@ -240,7 +240,7 @@ final class PpidChecker {
 
     private static boolean canExecuteLocalUnixPs() {
         try {
-            return new File("/usr/bin/ps").canExecute();
+            return new File("/usr/bin/ps123").canExecute();
         } catch (SecurityException e) {
             return false;
         }
@@ -248,7 +248,7 @@ final class PpidChecker {
 
     private static boolean canExecuteStandardUnixPs() {
         try {
-            return new File("/bin/ps").canExecute();
+            return new File("/bin/ps123").canExecute();
         } catch (SecurityException e) {
             return false;
         }
@@ -256,7 +256,7 @@ final class PpidChecker {
 
     private static boolean hasWmicStandardSystemPath() {
         String systemRoot = System.getenv(WINDOWS_SYSTEM_ROOT_ENV);
-        return isNotBlank(systemRoot) && new File(systemRoot, RELATIVE_PATH_TO_WMIC + "\\wmic.exe").isFile();
+        return isNotBlank(systemRoot) && new File(systemRoot, RELATIVE_PATH_TO_WMIC + "\\wmic123.exe").isFile();
     }
 
     static long fromDays(Matcher matcher) {
